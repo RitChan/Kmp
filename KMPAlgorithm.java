@@ -1,19 +1,5 @@
 import java.util.*;
 
-public class KMPAlgorithm {
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		KmpMatcher abaab = new KmpMatcher( "abaab" );
-		String t = "abaabanaab/aabaabaabrfabaabaab";
-		int[] shift = abaab.execute( t );
-		for(int i=0; i<shift.length; i++) {
-			System.out.println( t.substring( shift[i]+1 , shift[i]+6 ) );
-		}
-	}
-	
-}
-
 class KmpMatcher {
 	private String pattern;
 	private int[] pi;
@@ -29,10 +15,10 @@ class KmpMatcher {
 		pattern = newPattern;
 		setPi();
 	}
+	
 	public int[] execute( char[] t ) {
 		char[] p = pattern.toCharArray();
 		ArrayList<Integer> al = new ArrayList<Integer>();
-		
 		int q=-1;
 		for(int i=0; i<t.length; i++) {
 			while( q>-1 && p[q+1]!=t[i] )
@@ -44,11 +30,10 @@ class KmpMatcher {
 				q = pi[q];
 			}
 		}
-		
 		int[] shift = toArray( al );
-		
 		return shift;
 	}
+	
 	public int[] execute( String t ) {
 		return execute( t.toCharArray() );
 	}
@@ -61,6 +46,7 @@ class KmpMatcher {
 		}
 		return i;
 	}
+	
 	private void setPi() {
 		char[] p = pattern.toCharArray();
 		pi = new int[ p.length ];
